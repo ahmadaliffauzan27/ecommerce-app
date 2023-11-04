@@ -53,25 +53,25 @@ class Product {
 
 class PurpleAttributes {
   final String name;
-  final String descripstion;
-  final String price;
+  final String description;
+  final int price;
   final int stock;
   final DateTime createdAt;
   final DateTime updatedAt;
   final DateTime publishedAt;
-  final Image image;
-  final Categories categories;
+  final Images images;
+  // Categories categories;
 
   PurpleAttributes({
     required this.name,
-    required this.descripstion,
+    required this.description,
     required this.price,
     required this.stock,
     required this.createdAt,
     required this.updatedAt,
     required this.publishedAt,
-    required this.image,
-    required this.categories,
+    required this.images,
+    //  this.categories,
   });
 
   factory PurpleAttributes.fromJson(String str) =>
@@ -82,26 +82,26 @@ class PurpleAttributes {
   factory PurpleAttributes.fromMap(Map<String, dynamic> json) =>
       PurpleAttributes(
         name: json["name"],
-        descripstion: json["description"],
+        description: json["description"],
         price: json["price"],
         stock: json["stock"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         publishedAt: DateTime.parse(json["publishedAt"]),
-        image: Image.fromMap(json["image"]),
-        categories: Categories.fromMap(json["categories"]),
+        images: Images.fromMap(json["images"]),
+        // categories: Categories.fromMap(json["categories"]),
       );
 
   Map<String, dynamic> toMap() => {
         "name": name,
-        "description": descripstion,
+        "description": description,
         "price": price,
         "stock": stock,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
         "publishedAt": publishedAt.toIso8601String(),
-        "image": image.toMap(),
-        "categories": categories.toMap(),
+        "images": images.toMap(),
+        // "categories": categories.toMap(),
       };
 }
 
@@ -190,20 +190,20 @@ class FluffyAttributes {
       };
 }
 
-class Image {
-  final List<ImageDatum> data;
+class Images {
+  final List<ImagesDatum> data;
 
-  Image({
+  Images({
     required this.data,
   });
 
-  factory Image.fromJson(String str) => Image.fromMap(json.decode(str));
+  factory Images.fromJson(String str) => Images.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Image.fromMap(Map<String, dynamic> json) => Image(
-        data: List<ImageDatum>.from(
-            json["data"].map((x) => ImageDatum.fromMap(x))),
+  factory Images.fromMap(Map<String, dynamic> json) => Images(
+        data: List<ImagesDatum>.from(
+            json["data"].map((x) => ImagesDatum.fromMap(x))),
       );
 
   Map<String, dynamic> toMap() => {
@@ -211,21 +211,21 @@ class Image {
       };
 }
 
-class ImageDatum {
+class ImagesDatum {
   final int id;
   final TentacledAttributes attributes;
 
-  ImageDatum({
+  ImagesDatum({
     required this.id,
     required this.attributes,
   });
 
-  factory ImageDatum.fromJson(String str) =>
-      ImageDatum.fromMap(json.decode(str));
+  factory ImagesDatum.fromJson(String str) =>
+      ImagesDatum.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory ImageDatum.fromMap(Map<String, dynamic> json) => ImageDatum(
+  factory ImagesDatum.fromMap(Map<String, dynamic> json) => ImagesDatum(
         id: json["id"],
         attributes: TentacledAttributes.fromMap(json["attributes"]),
       );

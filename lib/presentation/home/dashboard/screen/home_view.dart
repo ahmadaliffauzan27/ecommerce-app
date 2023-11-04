@@ -206,9 +206,9 @@ class _HomeViewState extends State<HomeView> {
                     crossAxisSpacing: 10.0,
                     mainAxisSpacing: 55.0,
                   ),
-                  itemCount: products.length,
+                  itemCount: model.data.length,
                   itemBuilder: (context, index) => ProductCard(
-                    data: products[index],
+                    data: model.data[index],
                   ),
                 );
               });
