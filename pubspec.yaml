@@ -45,6 +45,7 @@ dependencies:
   bloc: ^8.1.2
   http: ^1.1.0
   carousel_slider: ^4.2.1
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/common/constants/colors.dart';
 import 'package:ecommerce_app/common/constants/images.dart';
+import 'package:ecommerce_app/presentation/account/account_page.dart';
 import 'package:ecommerce_app/presentation/home/dashboard/screen/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,8 @@ class _NavbarViewState extends State<NavbarView> {
       child: Text('Explore Page'),
     ),
     const Center(child: Text('Cart Page')),
-    const Center(child: Text('Account Page')),
+    // const Center(child: Text('Account Page')),
+    const AccountPage(),
   ];
 
   void _onItemTapped(int index) {

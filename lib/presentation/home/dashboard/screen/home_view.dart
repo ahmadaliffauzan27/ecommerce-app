@@ -7,6 +7,9 @@ import 'package:ecommerce_app/presentation/home/dashboard/widgets/image_slider.d
 import 'package:ecommerce_app/presentation/home/dashboard/widgets/product_card.dart';
 import 'package:ecommerce_app/presentation/home/dashboard/widgets/product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../bloc/product/product_bloc.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -188,18 +191,28 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
           const SpaceHeight(8.0),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10.0,
-              mainAxisSpacing: 55.0,
-            ),
-            itemCount: products.length,
-            itemBuilder: (context, index) => ProductCard(
-              data: products[index],
-            ),
+          BlocBuilder<ProductBloc, ProductState>(
+            builder: (context, state) {
+              return state.maybeWhen(orElse: () {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }, loaded: (model) {
+                return GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10.0,
+                    mainAxisSpacing: 55.0,
+                  ),
+                  itemCount: products.length,
+                  itemBuilder: (context, index) => ProductCard(
+                    data: products[index],
+                  ),
+                );
+              });
+            },
           ),
         ],
       ),
