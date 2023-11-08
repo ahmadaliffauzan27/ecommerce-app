@@ -1,13 +1,18 @@
-import 'package:ecommerce_app/common/components/search_input.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecommerce_app/common/components/font_weight.dart';
 import 'package:ecommerce_app/common/components/space_height.dart';
+import 'package:ecommerce_app/common/constants/app_text_style.dart';
 import 'package:ecommerce_app/common/constants/colors.dart';
 import 'package:ecommerce_app/common/constants/images.dart';
-import 'package:ecommerce_app/presentation/home/dashboard/widgets/category_button.dart';
-import 'package:ecommerce_app/presentation/home/dashboard/widgets/image_slider.dart';
-import 'package:ecommerce_app/presentation/home/dashboard/widgets/product_card.dart';
-import 'package:ecommerce_app/presentation/home/dashboard/widgets/product_model.dart';
+import 'package:ecommerce_app/presentation/cart/bloc/cart/cart_bloc.dart';
+import 'package:ecommerce_app/presentation/cart/screen/cart_page.dart';
+import 'package:ecommerce_app/presentation/home/dashboard/widgets/carousel_sertifikat_one.dart';
+import 'package:ecommerce_app/presentation/home/dashboard/widgets/carousel_sertifikat_three.dart';
+import 'package:ecommerce_app/presentation/home/dashboard/widgets/carousel_sertifikat_two.dart';
+import 'package:ecommerce_app/presentation/home/dashboard/widgets/container_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:badges/badges.dart' as badges;
 
 import '../../bloc/product/product_bloc.dart';
 
@@ -20,28 +25,6 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   late TextEditingController searchController;
-  final List<ProductModel> products = [
-    ProductModel(
-      images: [Images.product1],
-      name: 'Tas Kekinian',
-      price: 200000,
-    ),
-    ProductModel(
-      images: [Images.product2],
-      name: 'Earphone',
-      price: 199999,
-    ),
-    ProductModel(
-      images: [Images.product3],
-      name: 'Sepatu Pria',
-      price: 700000,
-    ),
-    ProductModel(
-      images: [Images.product4],
-      name: 'Earphone',
-      price: 670000,
-    ),
-  ];
 
   @override
   void initState() {
@@ -55,166 +38,252 @@ class _HomeViewState extends State<HomeView> {
     super.dispose();
   }
 
+  final CarouselController _carouselController = CarouselController();
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    final List<String> images = [
-      Images.recomendedProductBanner,
-      Images.recomendedProductBanner,
-      Images.recomendedProductBanner,
-    ];
-
     return Scaffold(
-      body: ListView(
-        padding: const EdgeInsets.all(16.0),
-        children: [
-          const SpaceHeight(20.0),
-          Row(
-            children: [
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Alamat Pengiriman",
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w400,
-                      color: ColorName.grey,
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  color: PrimaryColor.pr10,
+                  height: 240,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 64, 16, 0),
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  height: 35,
+                                  width: 2,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: null,
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Alamat Pengiriman',
+                                      style: AppTextStyle.body4.medium
+                                          .copyWith(color: Colors.white),
+                                    ),
+                                    Text(
+                                      'Cirebon, Jawa Barat',
+                                      style: AppTextStyle.body4.regular
+                                          .copyWith(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
+                            badges.Badge(
+                              badgeContent: BlocBuilder<CartBloc, CartState>(
+                                builder: (context, state) {
+                                  return state.maybeWhen(orElse: () {
+                                    return const Text('0');
+                                  }, success: (carts) {
+                                    int totalQty = 0;
+                                    for (var cart in carts) {
+                                      totalQty += cart.quantity;
+                                    }
+                                    return Text(
+                                      totalQty.toString(),
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    );
+                                  });
+                                },
+                              ),
+                              child: IconButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const CartPage()),
+                                    );
+                                  },
+                                  icon: Image.asset(
+                                    Images.iconBuy,
+                                    height: 24.0,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                            IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const SizedBox()),
+                                  );
+                                },
+                                icon: Image.asset(
+                                  Images.iconNotificationHome,
+                                  color: Colors.white,
+                                  height: 24.0,
+                                )),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  Row(
+                ),
+                Positioned(
+                  left: 0,
+                  top: 0,
+                  child: Image.asset(
+                    'assets/images/ornamen.png',
+                    width: 180,
+                    height: 135,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 150.0),
+                  child: Column(
                     children: [
-                      Text(
-                        "Sleman, DI Yogyakarta",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: ColorName.primary,
-                        ),
+                      CarouselSlider(
+                        carouselController: _carouselController,
+                        options: CarouselOptions(
+                            enlargeCenterPage: false,
+                            enableInfiniteScroll: true,
+                            height: 170,
+                            aspectRatio: 16 / 9,
+                            scrollDirection: Axis.horizontal,
+                            viewportFraction: 1,
+                            pauseAutoPlayOnTouch: true,
+                            autoPlay: true,
+                            onPageChanged: (index, reason) {
+                              setState(() {
+                                _currentIndex = index;
+                              });
+                            }),
+                        items: const [
+                          CarouselSertifikatOne(),
+                          CarouselSertifikatTwo(),
+                          CarouselSertifikatThree(),
+                        ],
                       ),
-                      SpaceWidth(5.0),
-                      Icon(
-                        Icons.expand_more,
-                        size: 18.0,
-                        color: ColorName.primary,
+                      const SizedBox(
+                        height: 24,
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(3, (index) {
+                          return Container(
+                            width: 8,
+                            height: 8,
+                            margin: const EdgeInsets.symmetric(horizontal: 5),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: _currentIndex == index
+                                  ? Colors.blue
+                                  : Colors.grey,
+                            ),
+                          );
+                        }),
+                      )
                     ],
                   ),
-                ],
-              ),
-              const Spacer(),
-              Row(
+                ),
+              ],
+            ),
+            // Container(
+            //   color: Colors.white,
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 16),
+            //     child: Column(
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: [
+            //         const SizedBox(
+            //           height: 50,
+            //         ),
+            //         Row(
+            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //           children: [
+            //             Text(
+            //               'Kategori',
+            //               style: AppTextStyle.body3.semiBold,
+            //             ),
+            //             Text(
+            //               'Lihat Semua ',
+            //               style: AppTextStyle.body3.regular,
+            //             ),
+            //           ],
+            //         ),
+            //         const SizedBox(
+            //           height: 16,
+            //         ),
+            //         const FiturLxp()
+            //       ],
+            //     ),
+            //   ),
+            // ),
+            const SpaceHeight(30.0),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SizedBox()),
-                        );
-                      },
-                      icon: Image.asset(
-                        Images.iconBuy,
-                        height: 24.0,
-                      )),
-                  IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SizedBox()),
-                        );
-                      },
-                      icon: Image.asset(
-                        Images.iconNotificationHome,
-                        height: 24.0,
-                      )),
+                  Text(
+                    'Produk',
+                    style: AppTextStyle.body3.semiBold,
+                  ),
+                  Text(
+                    'Lihat Semua ',
+                    style: AppTextStyle.body3.regular,
+                  ),
                 ],
               ),
-            ],
-          ),
-          const SpaceHeight(16.0),
-          SearchInput(
-            controller: searchController,
-            onChanged: (value) {},
-          ),
-          const SpaceHeight(16.0),
-          ImageSlider(items: images),
-          const SpaceHeight(12.0),
-          const Text(
-            "Kategori",
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-              color: ColorName.primary,
             ),
-          ),
-          const SpaceHeight(12.0),
-          Row(
-            children: [
-              Flexible(
-                child: CategoryButton(
-                  imagePath: Images.fashion1,
-                  label: 'Pakaian',
-                  onPressed: () {},
-                ),
-              ),
-              Flexible(
-                child: CategoryButton(
-                  imagePath: Images.fashion2,
-                  label: 'Pakaian',
-                  onPressed: () {},
-                ),
-              ),
-              Flexible(
-                child: CategoryButton(
-                  imagePath: Images.fashion3,
-                  label: 'Pakaian',
-                  onPressed: () {},
-                ),
-              ),
-              Flexible(
-                child: CategoryButton(
-                  imagePath: Images.more,
-                  label: 'Pakaian',
-                  onPressed: () {},
-                ),
-              ),
-            ],
-          ),
-          const SpaceHeight(16.0),
-          const Text(
-            "Produk",
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-              color: ColorName.primary,
+            const SpaceHeight(8.0),
+            BlocBuilder<ProductBloc, ProductState>(
+              builder: (context, state) {
+                return state.maybeWhen(orElse: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }, loaded: (model) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10.0,
+                        mainAxisSpacing: 15.0,
+                      ),
+                      itemCount: model.data.length,
+                      itemBuilder: (context, index) => ContainerProduct(
+                        data: model.data[index],
+                      ),
+                    ),
+                  );
+                });
+              },
             ),
-          ),
-          const SpaceHeight(8.0),
-          BlocBuilder<ProductBloc, ProductState>(
-            builder: (context, state) {
-              return state.maybeWhen(orElse: () {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }, loaded: (model) {
-                return GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10.0,
-                    mainAxisSpacing: 55.0,
-                  ),
-                  itemCount: model.data.length,
-                  itemBuilder: (context, index) => ProductCard(
-                    data: model.data[index],
-                  ),
-                );
-              });
-            },
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

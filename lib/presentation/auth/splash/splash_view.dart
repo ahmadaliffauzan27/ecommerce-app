@@ -1,5 +1,5 @@
 import 'package:ecommerce_app/common/constants/images.dart';
-import 'package:ecommerce_app/presentation/auth/login/login_page.dart';
+import 'package:ecommerce_app/presentation/auth/login/screen/login_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashView extends StatefulWidget {

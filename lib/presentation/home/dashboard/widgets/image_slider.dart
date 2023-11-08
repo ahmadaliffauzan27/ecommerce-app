@@ -21,11 +21,11 @@ class _ImageSliderState extends State<ImageSlider> {
       children: [
         CarouselSlider(
           items: widget.items
-              .map((e) => Image.asset(
+              .map((e) => Image.network(
                     e,
                     height: 206.0,
                     width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.scaleDown,
                   ))
               .toList(),
           carouselController: _controller,
@@ -52,8 +52,8 @@ class _ImageSliderState extends State<ImageSlider> {
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: (Theme.of(context).brightness == Brightness.dark
-                            ? ColorName.grey
-                            : ColorName.primary)
+                            ? NeutralColor.ne10
+                            : PrimaryColor.pr10)
                         .withOpacity(_current == entry.key ? 0.9 : 0.4)),
               ),
             );

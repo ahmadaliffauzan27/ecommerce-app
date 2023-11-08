@@ -1,3 +1,5 @@
+import 'package:ecommerce_app/common/components/font_weight.dart';
+import 'package:ecommerce_app/common/constants/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
@@ -11,7 +13,7 @@ class Button extends StatelessWidget {
     required this.onPressed,
     required this.label,
     this.style = ButtonStyle.filled,
-    this.color = ColorName.primary,
+    this.color = PrimaryColor.pr10,
     this.textColor = Colors.white,
     this.width = double.infinity,
     this.height = 50.0,
@@ -69,10 +71,8 @@ class Button extends StatelessWidget {
                   if (icon != null) const SpaceWidth(10.0),
                   Text(
                     label,
-                    style: TextStyle(
+                    style: AppTextStyle.body3.medium.copyWith(
                       color: textColor,
-                      fontSize: fontSize,
-                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],
@@ -94,10 +94,8 @@ class Button extends StatelessWidget {
                   if (icon != null) const SpaceWidth(10.0),
                   Text(
                     label,
-                    style: TextStyle(
+                    style: AppTextStyle.body3.medium.copyWith(
                       color: textColor,
-                      fontSize: fontSize,
-                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],

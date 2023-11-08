@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/presentation/auth/register/register_view.dart';
+import 'package:ecommerce_app/presentation/auth/register/screen/register_view.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {

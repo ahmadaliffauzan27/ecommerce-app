@@ -1,3 +1,5 @@
+import 'package:ecommerce_app/common/components/font_weight.dart';
+import 'package:ecommerce_app/common/constants/app_text_style.dart';
 import 'package:ecommerce_app/common/constants/colors.dart';
 import 'package:ecommerce_app/common/constants/images.dart';
 import 'package:ecommerce_app/presentation/account/account_page.dart';
@@ -16,11 +18,7 @@ class _NavbarViewState extends State<NavbarView> {
 
   final List<Widget> _pages = [
     const HomePage(),
-    const Center(
-      child: Text('Explore Page'),
-    ),
     const Center(child: Text('Cart Page')),
-    // const Center(child: Text('Account Page')),
     const AccountPage(),
   ];
 
@@ -35,18 +33,16 @@ class _NavbarViewState extends State<NavbarView> {
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        selectedLabelStyle: AppTextStyle.body4.semiBold,
+        unselectedLabelStyle: AppTextStyle.body4.semiBold,
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
-        selectedItemColor: ColorName.primary,
+        selectedItemColor: PrimaryColor.pr10,
         onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage(Images.iconHome)),
             label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(Images.iconSearch)),
-            label: 'Explore',
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage(Images.iconCart)),

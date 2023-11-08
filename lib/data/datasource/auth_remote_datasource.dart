@@ -18,7 +18,7 @@ class AuthRemoteDataSource {
     if (response.statusCode == 200) {
       return right(AuthResponseModel.fromJson(response.body));
     } else {
-      return left(response.body);
+      return left('Failed Register');
     }
   }
 

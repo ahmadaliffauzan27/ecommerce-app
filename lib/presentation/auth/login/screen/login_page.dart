@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/presentation/auth/login/login_view.dart';
+import 'package:ecommerce_app/presentation/auth/login/screen/login_view.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
