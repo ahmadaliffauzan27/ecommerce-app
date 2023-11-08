@@ -34,15 +34,16 @@ class ContainerProduct extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            height: 300,
+            height: 400,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.07),
+                  // color: Colors.black.withOpacity(0.07),
+                  color: PrimaryColor.pr10.withOpacity(0.2),
                   blurRadius: 10,
-                  offset: const Offset(0, 5),
+                  offset: const Offset(2, 10),
                 ),
               ],
             ),
@@ -51,7 +52,7 @@ class ContainerProduct extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    height: 100,
+                    height: 120,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
@@ -115,17 +116,17 @@ class ContainerProduct extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 0,
+            bottom: 0,
             right: 0,
             child: Container(
               width: 50,
               height: 35,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(10),
-                  bottomLeft: Radius.circular(10),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
                 ),
-                color: Colors.white.withOpacity(0.5),
+                color: PrimaryColor.pr10,
               ),
               child: IconButton(
                 onPressed: () {
@@ -133,7 +134,8 @@ class ContainerProduct extends StatelessWidget {
                       CartEvent.add(CartModel(product: data, quantity: 1)));
                 },
                 icon: const Icon(
-                  Icons.add_shopping_cart,
+                  Icons.add_sharp,
+                  color: Colors.white,
                   size: 20,
                 ),
               ),

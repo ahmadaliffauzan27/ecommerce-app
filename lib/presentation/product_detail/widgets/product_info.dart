@@ -30,9 +30,11 @@ class ProductInfoWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                product.attributes.name,
-                style: AppTextStyle.body1.semiBold,
+              Expanded(
+                child: Text(
+                  product.attributes.name,
+                  style: AppTextStyle.body1.semiBold,
+                ),
               ),
               StatefulBuilder(
                 builder: (context, setState) {
@@ -55,7 +57,7 @@ class ProductInfoWidget extends StatelessWidget {
             ],
           ),
         ),
-        const SpaceHeight(4.0),
+        const SpaceHeight(16.0),
         Padding(
           padding: padding,
           child: Text(

@@ -175,6 +175,13 @@ class $AssetsIconsGen {
   /// File path: assets/icons/User.png
   AssetGenImage get user => const AssetGenImage('assets/icons/User.png');
 
+  /// File path: assets/icons/elektronik.png
+  AssetGenImage get elektronik =>
+      const AssetGenImage('assets/icons/elektronik.png');
+
+  /// File path: assets/icons/fashion.png
+  AssetGenImage get fashion => const AssetGenImage('assets/icons/fashion.png');
+
   /// File path: assets/icons/love.png
   AssetGenImage get love => const AssetGenImage('assets/icons/love.png');
 
@@ -212,6 +219,8 @@ class $AssetsIconsGen {
         transaction,
         trash,
         user,
+        elektronik,
+        fashion,
         love,
         more
       ];

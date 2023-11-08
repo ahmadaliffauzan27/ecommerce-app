@@ -10,6 +10,7 @@ import 'package:ecommerce_app/presentation/home/dashboard/widgets/carousel_serti
 import 'package:ecommerce_app/presentation/home/dashboard/widgets/carousel_sertifikat_three.dart';
 import 'package:ecommerce_app/presentation/home/dashboard/widgets/carousel_sertifikat_two.dart';
 import 'package:ecommerce_app/presentation/home/dashboard/widgets/container_product.dart';
+import 'package:ecommerce_app/presentation/home/dashboard/widgets/fitur.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:badges/badges.dart' as badges;
@@ -206,37 +207,28 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ],
             ),
-            // Container(
-            //   color: Colors.white,
-            //   child: Padding(
-            //     padding: const EdgeInsets.symmetric(horizontal: 16),
-            //     child: Column(
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //       children: [
-            //         const SizedBox(
-            //           height: 50,
-            //         ),
-            //         Row(
-            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //           children: [
-            //             Text(
-            //               'Kategori',
-            //               style: AppTextStyle.body3.semiBold,
-            //             ),
-            //             Text(
-            //               'Lihat Semua ',
-            //               style: AppTextStyle.body3.regular,
-            //             ),
-            //           ],
-            //         ),
-            //         const SizedBox(
-            //           height: 16,
-            //         ),
-            //         const FiturLxp()
-            //       ],
-            //     ),
-            //   ),
-            // ),
+            Container(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    Text(
+                      'Kategori',
+                      style: AppTextStyle.body3.semiBold,
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    const Category()
+                  ],
+                ),
+              ),
+            ),
             const SpaceHeight(30.0),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -263,7 +255,7 @@ class _HomeViewState extends State<HomeView> {
                   );
                 }, loaded: (model) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 40),
                     child: GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -271,7 +263,8 @@ class _HomeViewState extends State<HomeView> {
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 10.0,
-                        mainAxisSpacing: 15.0,
+                        mainAxisSpacing: 10.0,
+                        childAspectRatio: 0.8,
                       ),
                       itemCount: model.data.length,
                       itemBuilder: (context, index) => ContainerProduct(

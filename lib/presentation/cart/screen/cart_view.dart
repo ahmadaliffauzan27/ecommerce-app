@@ -163,7 +163,7 @@ class _CartViewState extends State<CartView> {
                     return state.maybeWhen(
                       orElse: () {
                         return RowText(
-                          label: 'Total Harga',
+                          label: 'Total',
                           value: 0.currencyFormatRp,
                         );
                       },
@@ -184,7 +184,7 @@ class _CartViewState extends State<CartView> {
                                     e.product.attributes.price.toString())))
                             .toList();
                         return RowText(
-                          label: 'Total Harga',
+                          label: 'Total',
                           value: totalPrice.currencyFormatRp,
                           valueColor: PrimaryColor.pr10,
                           fontWeight: FontWeight.w700,
