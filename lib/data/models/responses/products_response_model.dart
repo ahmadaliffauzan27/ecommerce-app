@@ -82,7 +82,7 @@ class PurpleAttributes {
       PurpleAttributes(
         name: json["name"],
         description: json["description"],
-        price: json["price"],
+        price: int.parse(json["price"].toString()),
         stock: json["stock"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),

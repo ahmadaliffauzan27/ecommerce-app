@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 
 import 'space_height.dart';
 
-class CustomDropdown extends StatelessWidget {
-  final String? value;
-  final List<String> items;
+class CustomDropdown<T> extends StatelessWidget {
+  final T value;
+  final List<T> items;
   final String label;
-  final Function(String?)? onChanged;
+  final Function(T?)? onChanged;
 
   const CustomDropdown({
     super.key,
@@ -28,14 +28,14 @@ class CustomDropdown extends StatelessWidget {
           style: AppTextStyle.body4.semiBold,
         ),
         const SpaceHeight(12.0),
-        DropdownButtonFormField<String>(
+        DropdownButtonFormField<T>(
           value: value,
           onChanged: onChanged,
-          items: items.map((String item) {
-            return DropdownMenuItem<String>(
+          items: items.map((T item) {
+            return DropdownMenuItem<T>(
               value: item,
               child: Text(
-                item,
+                item.toString(),
                 style: AppTextStyle.body3.semiBold,
               ),
             );

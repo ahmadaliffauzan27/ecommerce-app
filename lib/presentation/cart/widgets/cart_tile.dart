@@ -51,9 +51,11 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.data.product.attributes.name,
-                      style: AppTextStyle.body4.semiBold,
+                    Expanded(
+                      child: Text(
+                        widget.data.product.attributes.name,
+                        style: AppTextStyle.body4.semiBold,
+                      ),
                     ),
                     const Spacer(),
                     InkWell(

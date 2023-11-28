@@ -237,6 +237,9 @@ class $AssetsImagesGen {
   AssetGenImage get recomendedProductBanner =>
       const AssetGenImage('assets/images/RecomendedProductBanner.png');
 
+  /// File path: assets/images/avatar.png
+  AssetGenImage get avatar => const AssetGenImage('assets/images/avatar.png');
+
   /// File path: assets/images/fashion1.png
   AssetGenImage get fashion1 =>
       const AssetGenImage('assets/images/fashion1.png');
@@ -248,6 +251,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/fashion3.png
   AssetGenImage get fashion3 =>
       const AssetGenImage('assets/images/fashion3.png');
+
+  /// File path: assets/images/ilustration-no-data.png
+  AssetGenImage get ilustrationNoData =>
+      const AssetGenImage('assets/images/ilustration-no-data.png');
 
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
@@ -281,9 +288,11 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [
         logoNike,
         recomendedProductBanner,
+        avatar,
         fashion1,
         fashion2,
         fashion3,
+        ilustrationNoData,
         logo,
         more,
         ornamen,
